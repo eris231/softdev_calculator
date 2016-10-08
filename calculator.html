@@ -4,22 +4,23 @@
 <title>Calculator</title>
 </head>
 <style>
-body {
-	margin: 0;
+
+td {
+	height: 20%;
 }
 
 </style>
 <body>
-	<div style="width:25%;display:inline-block;">
+	<div style="width:35%;display:inline-block;">
 	</div>
-	<div style="width:50%;background-color:#F0FFFF;height:800px;display:inline-block;">
+	<div style="width:30%;background-color:#F0FFFF;height:800px;display:inline-block;">
 		<div style="height:50px;">
 			<h1 style="text-align:center;">Calculator</h1>
 		</div>
 		<div style="height:50px;margin:10px">
-			<h2 style="text-align:right;">0</h2>
+			<h1 style="text-align:right;">0</h1>
 		</div>
-		<div id="values_in_bases">
+		<div id="values_in_bases" style="padding-bottom: 5px;">
 			<div style="height:50px;">
 				<div style="display:inline-block;">
 					<h2 style="text-align:center;width:100px;">HEX</h2>
@@ -53,10 +54,52 @@ body {
 				</div>
 			</div>
 		</div>
-		<div id="buttons">
+		<div id="buttons" style="padding-top:20px;">
+			<table style="width:100%;height:400px;table-layout:fixed;">
+				<tr>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;"></button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">Mod</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">CE</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">C</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">&#x2190</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">%</button></td>
+				</tr>
+				<tr>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">A</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">B</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">7</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">8</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">9</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">x</button></td>
+				</tr>
+				<tr>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">C</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">D</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">4</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">5</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">6</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">-</button></td>
+				</tr>
+				<tr>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">E</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">F</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">1</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">2</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">3</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">+</button></td>
+				</tr>
+				<tr>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;"></button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;"></button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">&#xb1</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">0</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;"></button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">=</button></td>
+				</tr>
+			</table>
 		</div>
 	</div>
-	<div style="width:25%;display:inline-block;">
+	<div style="width:35%;display:inline-block;">
 	</div>
 </body>	
 </html>
