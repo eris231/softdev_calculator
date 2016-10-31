@@ -1,7 +1,9 @@
 <html>
 <head>
+<meta charset="UTF-8">
 <link rel="icon" href="img/icon.png" type="image/png" sizes="16x16">
 <title>Calculator</title>
+<script src="js/calculator.js"></script>
 </head>
 <style>
 h1 {
@@ -37,39 +39,39 @@ button:enabled:active {
 			<h1 style="text-align:center;">Calculator</h1>
 		</div>
 		<div style="height:50px;margin:20px">
-			<h1 style="text-align:right;">0</h1>
+			<h1 style="text-align:right;" id="mainDisplay">0</h1>
 		</div>
 		<div id="values_in_bases" style="padding-bottom: 5px;">
-			<div style="height:50px;">
+			<div style="height:50px;" class="bases">
 				<div style="display:inline-block;">
 					<h2 style="text-align:center;width:100px;">HEX</h2>
 				</div>
 				<div style="display:inline-block;">
-					<h2 style="text-align:left;width:200px;">0</h2>
+					<h2 style="text-align:left;width:200px;" id="hexDisplay">0</h2>
 				</div>
 			</div>
-			<div style="height:50px;">
+			<div style="height:50px;" class="bases">
 				<div style="display:inline-block;">
 					<h2 style="text-align:center;width:100px;">DEC</h2>
 				</div>
 				<div style="display:inline-block;">
-					<h2 style="text-align:left;width:200px;">0</h2>
+					<h2 style="text-align:left;width:200px;" id="decDisplay">0</h2>
 				</div>
 			</div>
-			<div style="height:50px;">
+			<div style="height:50px;" class="bases">
 				<div style="display:inline-block;">
 					<h2 style="text-align:center;width:100px;">OCT</h2>
 				</div>
 				<div style="display:inline-block;">
-					<h2 style="text-align:left;width:200px;">0</h2>
+					<h2 style="text-align:left;width:200px;" id="octDisplay">0</h2>
 				</div>
 			</div>
-			<div style="height:50px;">
+			<div style="height:50px;" class="bases">
 				<div style="display:inline-block;">
 					<h2 style="text-align:center;width:100px;">BIN</h2>
 				</div>
 				<div style="display:inline-block;">
-					<h2 style="text-align:left;width:200px;">0</h2>
+					<h2 style="text-align:left;width:200px;" id="binDisplay">0</h2>
 				</div>
 			</div>
 		</div>
@@ -77,43 +79,43 @@ button:enabled:active {
 			<table style="width:100%;height:400px;table-layout:fixed;">
 				<tr>
 					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" disabled></button></td>
-					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">Mod</button></td>
-					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">CE</button></td>
-					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">C</button></td>
-					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">&#x2190</button></td>
-					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">%</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="mod">Mod</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="clear_mainDisplay">CE</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="clear_all">C</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="backspace">&#x2190</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="div">%</button></td>
 				</tr>
 				<tr>
-					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">A</button></td>
-					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">B</button></td>
-					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">7</button></td>
-					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">8</button></td>
-					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">9</button></td>
-					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">x</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="A">A</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="B">B</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="7">7</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="8">8</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="9">9</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="mul">x</button></td>
 				</tr>
 				<tr>
-					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">C</button></td>
-					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">D</button></td>
-					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">4</button></td>
-					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">5</button></td>
-					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">6</button></td>
-					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">-</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="C">C</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="D">D</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="4">4</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="5">5</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="6">6</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="sub">-</button></td>
 				</tr>
 				<tr>
-					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">E</button></td>
-					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">F</button></td>
-					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">1</button></td>
-					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">2</button></td>
-					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">3</button></td>
-					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">+</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="E">E</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="F">F</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="1">1</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="2">2</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="3">3</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="add">+</button></td>
 				</tr>
 				<tr>
 					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" disabled></button></td>
 					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" disabled></button></td>
-					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">&#xb1</button></td>
-					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">0</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="neg">&#xb1</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="0">0</button></td>
 					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" disabled></button></td>
-					<td><button style="width:60px;height:60px;display:block;margin:0 auto;">=</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="equ">=</button></td>
 				</tr>
 			</table>
 		</div>
