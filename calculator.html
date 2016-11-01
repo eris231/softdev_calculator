@@ -44,7 +44,7 @@ button:enabled:active {
 		<div id="values_in_bases" style="padding-bottom: 5px;">
 			<div style="height:50px;" class="bases">
 				<div style="display:inline-block;">
-					<h2 style="text-align:center;width:100px;">HEX</h2>
+					<h2 style="text-align:center;width:100px;" id="hexLabel">HEX</h2>
 				</div>
 				<div style="display:inline-block;">
 					<h2 style="text-align:left;width:200px;" id="hexDisplay">0</h2>
@@ -52,15 +52,15 @@ button:enabled:active {
 			</div>
 			<div style="height:50px;" class="bases">
 				<div style="display:inline-block;">
-					<h2 style="text-align:center;width:100px;">DEC</h2>
+					<h2 style="text-align:center;width:100px;color:#42AAF4;" id="decLabel">DEC</h2>
 				</div>
 				<div style="display:inline-block;">
-					<h2 style="text-align:left;width:200px;" id="decDisplay">0</h2>
+					<h2 style="text-align:left;width:200px;color:#42AAF4;" id="decDisplay">0</h2>
 				</div>
 			</div>
 			<div style="height:50px;" class="bases">
 				<div style="display:inline-block;">
-					<h2 style="text-align:center;width:100px;">OCT</h2>
+					<h2 style="text-align:center;width:100px;" id="octLabel">OCT</h2>
 				</div>
 				<div style="display:inline-block;">
 					<h2 style="text-align:left;width:200px;" id="octDisplay">0</h2>
@@ -68,7 +68,7 @@ button:enabled:active {
 			</div>
 			<div style="height:50px;" class="bases">
 				<div style="display:inline-block;">
-					<h2 style="text-align:center;width:100px;">BIN</h2>
+					<h2 style="text-align:center;width:100px;" id="binLabel">BIN</h2>
 				</div>
 				<div style="display:inline-block;">
 					<h2 style="text-align:left;width:200px;" id="binDisplay">0</h2>
@@ -86,24 +86,24 @@ button:enabled:active {
 					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="div">%</button></td>
 				</tr>
 				<tr>
-					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="A">A</button></td>
-					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="B">B</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="A" disabled>A</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="B" disabled>B</button></td>
 					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="7">7</button></td>
 					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="8">8</button></td>
 					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="9">9</button></td>
 					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="mul">x</button></td>
 				</tr>
 				<tr>
-					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="C">C</button></td>
-					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="D">D</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="C" disabled>C</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="D" disabled>D</button></td>
 					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="4">4</button></td>
 					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="5">5</button></td>
 					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="6">6</button></td>
 					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="sub">-</button></td>
 				</tr>
 				<tr>
-					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="E">E</button></td>
-					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="F">F</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="E" disabled>E</button></td>
+					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="F" disabled>F</button></td>
 					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="1">1</button></td>
 					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="2">2</button></td>
 					<td><button style="width:60px;height:60px;display:block;margin:0 auto;" value="3">3</button></td>
