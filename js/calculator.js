@@ -136,6 +136,12 @@ window.onload = function() {
 				}
 				pre_memory = val;
 			}
+			else if(val == "neg") {
+				if(pre_memory == "num") {
+					cur_val = parseInt(document.getElementById("mainDisplay").innerHTML);
+					document.getElementById("mainDisplay").innerHTML = -cur_val;
+				}
+			}
 			else if(val == "backspace" && pre_memory=="num") {
 				if(parseInt(cur_val)) {
 					if(parseInt(cur_val)>0)
