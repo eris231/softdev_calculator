@@ -31,10 +31,11 @@ window.onload = function() {
 		cur_val = parseInt(cur_val);
 		
 		if( isNumeric(val) ) {	//0~9
-			if(pre_memory == "add" || pre_memory == "sub" || pre_memory == "mul" || pre_memory == "div")
+			if(pre_memory == "add" || pre_memory == "sub" || pre_memory == "mul" || pre_memory == "div" || pre_memory == "mod")
 				op_stack.push(pre_memory);
 			
-			if(pre_memory == "add" || pre_memory == "sub" || pre_memory == "mul" || pre_memory == "div" || pre_memory == "none" || pre_memory == "equ") {
+			if(pre_memory == "add" || pre_memory == "sub" || pre_memory == "mul" || pre_memory == "div" || pre_memory == "none" || pre_memory == "equ"
+			|| pre_memory == "mod") {
 				document.getElementById("mainDisplay").innerHTML = parseInt(val);
 			}
 			else if(pre_memory == "num") {
@@ -60,10 +61,14 @@ window.onload = function() {
 							else if(tmp_op=="sub") cur_val = tmp_num2 - tmp_num1;
 							else if(tmp_op=="mul") cur_val = tmp_num1 * tmp_num2;
 							else if(tmp_op=="div") cur_val = Math.floor(tmp_num2 / tmp_num1);
+							else if(tmp_op=="mod") cur_val = tmp_num2 % tmp_num1;
 							output_list.push(cur_val);
 							document.getElementById("mainDisplay").innerHTML = cur_val;
 						}
 					}
+				}
+				else if(pre_memory=="none") {
+					output_list.push(0);
 				}
 				pre_memory = val;
 			}
@@ -73,7 +78,7 @@ window.onload = function() {
 				if(pre_memory=="num") {
 					cur_val = document.getElementById("mainDisplay").innerHTML;
 					output_list.push(cur_val);
-					if(output_list.length>1 && (op_stack[op_stack.length-1]=="mul"||op_stack[op_stack.length-1]=="div")) {
+					if(output_list.length>1 && (op_stack[op_stack.length-1]=="mul"||op_stack[op_stack.length-1]=="div")||op_stack[op_stack.length-1]=="mod") {
 						var tmp_num1 = parseInt(output_list.pop());
 						var tmp_num2 = parseInt(output_list.pop());
 						var tmp_op = op_stack.pop();
@@ -81,10 +86,13 @@ window.onload = function() {
 						else if(tmp_op=="sub") cur_val = tmp_num2 - tmp_num1;
 						else if(tmp_op=="mul") cur_val = tmp_num1 * tmp_num2;
 						else if(tmp_op=="div") cur_val = Math.floor(tmp_num2 / tmp_num1);
+						else if(tmp_op=="mod") cur_val = tmp_num2 % tmp_num1;
 						output_list.push(cur_val);
 						document.getElementById("mainDisplay").innerHTML = cur_val;
 					}
-					
+				}
+				else if(pre_memory=="none") {
+					output_list.push(0);
 				}
 				pre_memory = val;			
 			}
@@ -101,6 +109,7 @@ window.onload = function() {
 						else if(tmp_op=="sub") cur_val = tmp_num2 - tmp_num1;
 						else if(tmp_op=="mul") cur_val = tmp_num1 * tmp_num2;
 						else if(tmp_op=="div") cur_val = Math.floor(tmp_num2 / tmp_num1);
+						else if(tmp_op=="mod") cur_val = tmp_num2 % tmp_num1;
 						output_list.push(cur_val);
 						document.getElementById("mainDisplay").innerHTML = cur_val;
 					}
@@ -117,7 +126,17 @@ window.onload = function() {
 				pre_memory = "equ";
 				op_stack = [];
 			}
-			else if(val == "backspace") {
+			else if(val == "mod") {
+				if(pre_memory == "num") {
+					cur_val = document.getElementById("mainDisplay").innerHTML;
+					output_list.push(cur_val);
+				}
+				else if(pre_memory == "none") {
+					output_list.push(0);
+				}
+				pre_memory = val;
+			}
+			else if(val == "backspace" && pre_memory=="num") {
 				if(parseInt(cur_val)) {
 					if(parseInt(cur_val)>0)
 						document.getElementById("mainDisplay").innerHTML = Math.floor(parseInt(cur_val)/10);
