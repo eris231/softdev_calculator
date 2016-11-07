@@ -223,6 +223,23 @@ $(document).ready(function(){
 			else if(val == "mod") {
 				if(pre_memory == "num") {
 					output_list.push(cur_val);
+					if(op_stack.length) {
+						last_operand = cur_val;
+						while(op_stack.length) {
+							var tmp_num1 = parseInt(output_list.pop());
+							var tmp_num2 = parseInt(output_list.pop());
+							var tmp_op = op_stack.pop();
+							if(tmp_op=="add") cur_val = tmp_num1 + tmp_num2;
+							else if(tmp_op=="sub") cur_val = tmp_num2 - tmp_num1;
+							else if(tmp_op=="mul") cur_val = tmp_num1 * tmp_num2;
+							else if(tmp_op=="div") cur_val = Math.floor(tmp_num2 / tmp_num1);
+							else if(tmp_op=="mod") cur_val = tmp_num2 % tmp_num1;
+							last_operand = tmp_num1;
+							last_operator = tmp_op;
+							console.log("last"+last_operand+last_operator);
+							output_list.push(cur_val);
+						}
+					}
 				}
 				else if(pre_memory == "none") {
 					output_list.push(0);
