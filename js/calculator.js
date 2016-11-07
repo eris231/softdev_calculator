@@ -1,131 +1,126 @@
-document.addEventListener("DOMContentLoaded", function(event) {
-    console.log("DOM fully loaded and parsed");
-
+$(document).ready(function(){
 	var op_stack = [];
 	var output_list = [];
 	var pre_memory = "none";
 	var last_operator, last_operand;
-	var buttons = document.querySelectorAll("button");
-	var bases = document.querySelectorAll(".bases");
 	var mode = "DEC";
 	var cur_val = 0;
-	for(var i=0;i<buttons.length;i++) {
-		buttons[i].addEventListener("click", function() {
-			calc(this.getAttribute("value"));
+	$("button").each(function() {
+		$(this).click(function(){
+			calc($(this).attr("value"));
 		});
-	}
-	for(var i=0;i<bases.length;i++) {
-		bases[i].addEventListener("mouseover", function() {
-			this.style.backgroundColor = "#DCDCDC";
+	});
+	$(".bases").each(function() {
+		$(this).mouseover(function() {
+			$(this).css("backgroundColor", "#DCDCDC");
 		});
-		bases[i].addEventListener("mouseout", function() {
-			this.style.backgroundColor = "#F0FFFF";
+		$(this).mouseout(function() {
+			$(this).css("backgroundColor", "#F0FFFF");
 		});
-		bases[i].addEventListener("click", function() {
-			mode = this.children[0].innerText;
-			console.log(mode);
+		$(this).click(function() {
+			mode = $(this).find("h2").html();
 			if(mode == "HEX") {
-				document.querySelector("[value='A']").disabled = false;
-				document.querySelector("[value='B']").disabled = false;
-				document.querySelector("[value='C']").disabled = false;
-				document.querySelector("[value='D']").disabled = false;
-				document.querySelector("[value='E']").disabled = false;
-				document.querySelector("[value='F']").disabled = false;
-				document.querySelector("[value='9']").disabled = false;
-				document.querySelector("[value='8']").disabled = false;
-				document.querySelector("[value='7']").disabled = false;
-				document.querySelector("[value='6']").disabled = false;
-				document.querySelector("[value='5']").disabled = false;
-				document.querySelector("[value='4']").disabled = false;
-				document.querySelector("[value='3']").disabled = false;
-				document.querySelector("[value='2']").disabled = false;
-				document.getElementById("mainDisplay").innerHTML = document.getElementById("hexDisplay").innerHTML;
-				document.getElementById("hexDisplay").style.color = "#42AAF4";
-				document.getElementById("decDisplay").style.color = "#000000";
-				document.getElementById("octDisplay").style.color = "#000000";
-				document.getElementById("binDisplay").style.color = "#000000";
-				document.getElementById("hexLabel").style.color = "#42AAF4";
-				document.getElementById("decLabel").style.color = "#000000";
-				document.getElementById("octLabel").style.color = "#000000";
-				document.getElementById("binLabel").style.color = "#000000";
+				$("[value='A']").prop('disabled', false);
+				$("[value='B']").prop('disabled', false);
+				$("[value='C']").prop('disabled', false);
+				$("[value='D']").prop('disabled', false);
+				$("[value='E']").prop('disabled', false);
+				$("[value='F']").prop('disabled', false);
+				$("[value='9']").prop('disabled', false);
+				$("[value='8']").prop('disabled', false);
+				$("[value='7']").prop('disabled', false);
+				$("[value='6']").prop('disabled', false);
+				$("[value='5']").prop('disabled', false);
+				$("[value='4']").prop('disabled', false);
+				$("[value='3']").prop('disabled', false);
+				$("[value='2']").prop('disabled', false);
+				$("#mainDisplay").html( $("#hexDisplay").html() );
+				$("#hexDisplay").css("color", "#42AAF4");
+				$("#decDisplay").css("color", "#000000");
+				$("#octDisplay").css("color", "#000000");
+				$("#binDisplay").css("color", "#000000");
+				$("#hexLabel").css("color", "#42AAF4");
+				$("#decLabel").css("color", "#000000");
+				$("#octLabel").css("color", "#000000");
+				$("#binLabel").css("color", "#000000");
 			}
 			else if(mode == "DEC") {
-				document.querySelector("[value='A']").disabled = true;
-				document.querySelector("[value='B']").disabled = true;
-				document.querySelector("[value='C']").disabled = true;
-				document.querySelector("[value='D']").disabled = true;
-				document.querySelector("[value='E']").disabled = true;
-				document.querySelector("[value='F']").disabled = true;
-				document.querySelector("[value='9']").disabled = false;
-				document.querySelector("[value='8']").disabled = false;
-				document.querySelector("[value='7']").disabled = false;
-				document.querySelector("[value='6']").disabled = false;
-				document.querySelector("[value='5']").disabled = false;
-				document.querySelector("[value='4']").disabled = false;
-				document.querySelector("[value='3']").disabled = false;
-				document.querySelector("[value='2']").disabled = false;
-				document.getElementById("mainDisplay").innerHTML = document.getElementById("decDisplay").innerHTML;
-				document.getElementById("hexDisplay").style.color = "#000000";
-				document.getElementById("decDisplay").style.color = "#42AAF4";
-				document.getElementById("octDisplay").style.color = "#000000";
-				document.getElementById("binDisplay").style.color = "#000000";
-				document.getElementById("hexLabel").style.color = "#000000";
-				document.getElementById("decLabel").style.color = "#42AAF4";
-				document.getElementById("octLabel").style.color = "#000000";
-				document.getElementById("binLabel").style.color = "#000000";
+				$("[value='A']").prop('disabled', true);
+				$("[value='B']").prop('disabled', true);
+				$("[value='C']").prop('disabled', true);
+				$("[value='D']").prop('disabled', true);
+				$("[value='E']").prop('disabled', true);
+				$("[value='F']").prop('disabled', true);
+				$("[value='9']").prop('disabled', false);
+				$("[value='8']").prop('disabled', false);
+				$("[value='7']").prop('disabled', false);
+				$("[value='6']").prop('disabled', false);
+				$("[value='5']").prop('disabled', false);
+				$("[value='4']").prop('disabled', false);
+				$("[value='3']").prop('disabled', false);
+				$("[value='2']").prop('disabled', false);
+				$("#mainDisplay").html( $("#decDisplay").html() );
+				$("#hexDisplay").css("color", "#000000");
+				$("#decDisplay").css("color", "#42AAF4");
+				$("#octDisplay").css("color", "#000000");
+				$("#binDisplay").css("color", "#000000");
+				$("#hexLabel").css("color", "#000000");
+				$("#decLabel").css("color", "#42AAF4");
+				$("#octLabel").css("color", "#000000");
+				$("#binLabel").css("color", "#000000");
 			}
 			else if(mode == "OCT") {
-				document.querySelector("[value='A']").disabled = true;
-				document.querySelector("[value='B']").disabled = true;
-				document.querySelector("[value='C']").disabled = true;
-				document.querySelector("[value='D']").disabled = true;
-				document.querySelector("[value='E']").disabled = true;
-				document.querySelector("[value='F']").disabled = true;
-				document.querySelector("[value='9']").disabled = true;
-				document.querySelector("[value='8']").disabled = true;
-				document.querySelector("[value='7']").disabled = false;
-				document.querySelector("[value='6']").disabled = false;
-				document.querySelector("[value='5']").disabled = false;
-				document.querySelector("[value='4']").disabled = false;
-				document.querySelector("[value='3']").disabled = false;
-				document.querySelector("[value='2']").disabled = false;
-				document.getElementById("mainDisplay").innerHTML = document.getElementById("octDisplay").innerHTML;
-				document.getElementById("hexDisplay").style.color = "#000000";
-				document.getElementById("decDisplay").style.color = "#000000";
-				document.getElementById("octDisplay").style.color = "#42AAF4";
-				document.getElementById("binDisplay").style.color = "#000000";
-				document.getElementById("hexLabel").style.color = "#000000";
-				document.getElementById("decLabel").style.color = "#000000";
-				document.getElementById("octLabel").style.color = "#42AAF4";
-				document.getElementById("binLabel").style.color = "#000000";
+				$("[value='A']").prop('disabled', true);
+				$("[value='B']").prop('disabled', true);
+				$("[value='C']").prop('disabled', true);
+				$("[value='D']").prop('disabled', true);
+				$("[value='E']").prop('disabled', true);
+				$("[value='F']").prop('disabled', true);
+				$("[value='9']").prop('disabled', true);
+				$("[value='8']").prop('disabled', true);
+				$("[value='7']").prop('disabled', false);
+				$("[value='6']").prop('disabled', false);
+				$("[value='5']").prop('disabled', false);
+				$("[value='4']").prop('disabled', false);
+				$("[value='3']").prop('disabled', false);
+				$("[value='2']").prop('disabled', false);
+				$("#mainDisplay").html( $("#octDisplay").html() );
+				$("#hexDisplay").css("color", "#000000");
+				$("#decDisplay").css("color", "#000000");
+				$("#octDisplay").css("color", "#42AAF4");
+				$("#binDisplay").css("color", "#000000");
+				$("#hexLabel").css("color", "#000000");
+				$("#decLabel").css("color", "#000000");
+				$("#octLabel").css("color", "#42AAF4");
+				$("#binLabel").css("color", "#000000");
 			}
 			else if(mode == "BIN") {
-				document.querySelector("[value='A']").disabled = true;
-				document.querySelector("[value='B']").disabled = true;
-				document.querySelector("[value='C']").disabled = true;
-				document.querySelector("[value='D']").disabled = true;
-				document.querySelector("[value='E']").disabled = true;
-				document.querySelector("[value='F']").disabled = true;
-				document.querySelector("[value='9']").disabled = true;
-				document.querySelector("[value='8']").disabled = true;
-				document.querySelector("[value='7']").disabled = true;
-				document.querySelector("[value='6']").disabled = true;
-				document.querySelector("[value='5']").disabled = true;
-				document.querySelector("[value='4']").disabled = true;
-				document.querySelector("[value='3']").disabled = true;
-				document.querySelector("[value='2']").disabled = true;
-				document.getElementById("mainDisplay").innerHTML = document.getElementById("binDisplay").innerHTML;
-				document.getElementById("hexDisplay").style.color = "#000000";
-				document.getElementById("decDisplay").style.color = "#000000";
-				document.getElementById("octDisplay").style.color = "#000000";
-				document.getElementById("binDisplay").style.color = "#42AAF4";
-				document.getElementById("hexLabel").style.color = "#000000";
-				document.getElementById("decLabel").style.color = "#000000";
-				document.getElementById("octLabel").style.color = "#000000";
-				document.getElementById("binLabel").style.color = "#42AAF4";
+				$("[value='A']").prop('disabled', true);
+				$("[value='B']").prop('disabled', true);
+				$("[value='C']").prop('disabled', true);
+				$("[value='D']").prop('disabled', true);
+				$("[value='E']").prop('disabled', true);
+				$("[value='F']").prop('disabled', true);
+				$("[value='9']").prop('disabled', true);
+				$("[value='8']").prop('disabled', true);
+				$("[value='7']").prop('disabled', true);
+				$("[value='6']").prop('disabled', true);
+				$("[value='5']").prop('disabled', true);
+				$("[value='4']").prop('disabled', true);
+				$("[value='3']").prop('disabled', true);
+				$("[value='2']").prop('disabled', true);
+				$("#mainDisplay").html( $("#binDisplay").html() );
+				$("#hexDisplay").css("color", "#000000");
+				$("#decDisplay").css("color", "#000000");
+				$("#octDisplay").css("color", "#000000");
+				$("#binDisplay").css("color", "#42AAF4");
+				$("#hexLabel").css("color", "#000000");
+				$("#decLabel").css("color", "#000000");
+				$("#octLabel").css("color", "#000000");
+				$("#binLabel").css("color", "#42AAF4");
 			}
 		});
-	}
+	});
 
 	function calc(val) {
 		var base;
@@ -135,28 +130,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		else if(mode=="BIN") base=2;
 		console.log("op "+op_stack);
 		console.log("list "+output_list);
-		//var cur_val = document.getElementById("mainDisplay").getAttribute("value");
 		if( isNumeric(val) || (val>="A" && val<="F")) {	//numbers
 			if(base==16) val = "0x" + val;
-			
 			if(pre_memory == "add" || pre_memory == "sub" || pre_memory == "mul" || pre_memory == "div" || pre_memory == "mod") {
-				//document.getElementById("mainDisplay").innerHTML = (parseInt(val, base).toString(base)).toUpperCase();
-				//document.getElementById("mainDisplay").setAttribute("value", parseInt(val, base));
-				//document.getElementById("mainDisplay").value = parseInt(val, base);
 				cur_val = parseInt(val, base);
 				op_stack.push(pre_memory);
 			}
 			else if(pre_memory == "equ") {
-				//document.getElementById("mainDisplay").innerHTML = (parseInt(val, base).toString(base)).toUpperCase();
-				//document.getElementById("mainDisplay").setAttribute("value", parseInt(val, base));
-				//document.getElementById("mainDisplay").value = parseInt(val, base);
 				cur_val = parseInt(val, base);
 			}
 			else if(pre_memory == "num" || pre_memory == "none") {
-				//document.getElementById("mainDisplay").innerHTML = ((cur_val*base + parseInt(val, base)).toString(base)).toUpperCase();
-				//document.getElementById("mainDisplay").setAttribute("value", cur_val*10 + parseInt(val, base));
-				//document.getElementById("mainDisplay").value = cur_val*10 + parseInt(val, base);
-				cur_val = cur_val*10 + parseInt(val, base);
+				cur_val = cur_val*base + parseInt(val, base);
 			}
 			pre_memory = "num";
 		}
@@ -164,6 +148,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			if(val == "add" || val == "sub") {
 				last_operator = val;
 				if(pre_memory=="num") {
+					console.log(cur_val);
 					output_list.push(cur_val);
 					if(output_list.length>1) {
 						while(op_stack.length) {
@@ -176,9 +161,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 							else if(tmp_op=="div") cur_val = Math.floor(tmp_num2 / tmp_num1);
 							else if(tmp_op=="mod") cur_val = tmp_num2 % tmp_num1;
 							output_list.push(cur_val);
-							//document.getElementById("mainDisplay").innerHTML = (cur_val.toString(base)).toUpperCase();
-							//document.getElementById("mainDisplay").setAttribute("value", cur_val);
-							//document.getElementById("mainDisplay").value = cur_val;
 						}
 					}
 				}
@@ -201,9 +183,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 						else if(tmp_op=="div") cur_val = Math.floor(tmp_num2 / tmp_num1);
 						else if(tmp_op=="mod") cur_val = tmp_num2 % tmp_num1;
 						output_list.push(cur_val);
-						//document.getElementById("mainDisplay").innerHTML = (cur_val.toString(base)).toUpperCase();
-						//document.getElementById("mainDisplay").setAttribute("value", cur_val);
-						//document.getElementById("mainDisplay").value = cur_val;
 					}
 				}
 				else if(pre_memory=="none") {
@@ -228,9 +207,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 						last_operator = tmp_op;
 						console.log("last"+last_operand+last_operator);
 						output_list.push(cur_val);
-						//document.getElementById("mainDisplay").innerHTML = (cur_val.toString(base)).toUpperCase();
-						//document.getElementById("mainDisplay").setAttribute("value", cur_val);
-						//document.getElementById("mainDisplay").value = cur_val;
 					}
 				}
 				else {
@@ -238,9 +214,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 					else if(last_operator=="sub") cur_val -= last_operand;
 					else if(last_operator=="mul") cur_val *= last_operand;
 					else if(last_operator=="div") cur_val = Math.floor(cur_val / last_operand);
-					//document.getElementById("mainDisplay").innerHTML = (cur_val.toString(base)).toUpperCase();
-					//document.getElementById("mainDisplay").setAttribute("value", cur_val);
-					//document.getElementById("mainDisplay").value = cur_val;
 					output_list = []
 					output_list.push(cur_val);
 				}
@@ -258,32 +231,22 @@ document.addEventListener("DOMContentLoaded", function(event) {
 			}
 			else if(val == "neg") {
 				if(pre_memory == "num") {
-					//document.getElementById("mainDisplay").innerHTML = ((-cur_val).toString(base)).toUpperCase();
-					//document.getElementById("mainDisplay").setAttribute("value", -cur_val);
-					//document.getElementById("mainDisplay").value = -cur_val;
 					cur_val = -cur_val;
 				}
 			}
 			else if(val == "backspace" && pre_memory=="num") {
 				if(cur_val) {
+					console.log("back"+cur_val+" "+base);
 					if(cur_val>0) {
-						//document.getElementById("mainDisplay").innerHTML = (( Math.floor(parseInt(cur_val, base)/10) ).toString(base)).toUpperCase();
-						//document.getElementById("mainDisplay").setAttribute("value", Math.floor(parseInt(cur_val, base)/10));
-						//document.getElementById("mainDisplay").value = Math.floor(parseInt(cur_val, base)/10);
-						cur_val = Math.floor(parseInt(cur_val, base)/10);
+						cur_val = Math.floor(cur_val/base);
 					}
 					else {
 						cur_val = -cur_val;
-						//document.getElementById("mainDisplay").setAttribute("value", -Math.floor(parseInt(cur_val, base)/10));
-						//document.getElementById("mainDisplay").value = -Math.floor(parseInt(cur_val, base)/10);
-						cur_val = -Math.floor(parseInt(cur_val, base)/10);
+						cur_val = -Math.floor(cur_val/base);
 					}
 				}
 			}
 			else if(val == "clear_cur") {
-				//document.getElementById("mainDisplay").innerHTML = 0;
-				//document.getElementById("mainDisplay").setAttribute("value", 0);
-				//document.getElementById("mainDisplay").value = 0;
 				cur_val = 0;
 			}
 			else if(val == "clear_all") {
@@ -292,13 +255,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 				last_operand = NaN;
 				last_operator = "";
 				pre_memory = "none";
-				//document.getElementById("mainDisplay").innerHTML = 0;
-				//document.getElementById("mainDisplay").setAttribute("value", 0);
-				//document.getElementById("mainDisplay").value = 0;
 				cur_val = 0;
 			}
 		}
-		//cur_val = document.getElementById("mainDisplay").getAttribute("value");
 		console.log("cur_val="+cur_val);
 		display(mode);
 		
@@ -307,7 +266,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
 	function isNumeric(n) {
 		return !isNaN(parseInt(n)) && isFinite(n);
 	}
-	dec_to_bho  = function(n, base) {  
+	dec_to_bho  = function(n, base) {
+		console.log(n);
 		if (n < 0) {  
 			n = 0xFFFFFFFF + n + 1;  
 		}   
@@ -325,19 +285,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		}    
 	}
 	function display(mode) {
-		//cur_val = document.getElementById("mainDisplay").getAttribute("value");
-		document.getElementById("hexDisplay").innerHTML = dec_to_bho(cur_val, 16);
-		document.getElementById("decDisplay").innerHTML = cur_val.toString(10);
-		document.getElementById("octDisplay").innerHTML = dec_to_bho(cur_val, 8);
-		document.getElementById("binDisplay").innerHTML = dec_to_bho(cur_val, 2);
+		$("#hexDisplay").html(dec_to_bho(cur_val, 16));
+		$("#decDisplay").html(cur_val.toString(10));
+		$("#octDisplay").html(dec_to_bho(cur_val, 8));
+		$("#binDisplay").html(dec_to_bho(cur_val, 2));
 		if(mode=="HEX")
-			document.getElementById("mainDisplay").innerHTML = document.getElementById("hexDisplay").innerHTML;
+			$("#mainDisplay").html(dec_to_bho(cur_val, 16));
 		else if(mode=="DEC")
-			document.getElementById("mainDisplay").innerHTML = document.getElementById("decDisplay").innerHTML;
+			$("#mainDisplay").html(cur_val.toString(10));
 		else if(mode=="OCT")
-			document.getElementById("mainDisplay").innerHTML = document.getElementById("octDisplay").innerHTML;
+			$("#mainDisplay").html(dec_to_bho(cur_val, 8));
 		else if(mode=="BIN")	
-			document.getElementById("mainDisplay").innerHTML = document.getElementById("binDisplay").innerHTML;
-		
+			$("#mainDisplay").html(dec_to_bho(cur_val, 2));
 	}
 });
